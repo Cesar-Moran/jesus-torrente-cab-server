@@ -8,6 +8,10 @@
   },
   "keywords": [],
   "author": "",
+  "engines": {
+    "node": "14.17.0", 
+    "node-render": "16.13.0"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.8.10",
