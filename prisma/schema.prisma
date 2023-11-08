@@ -14,12 +14,28 @@ model Dealer {
   id                  Int    @id @default(autoincrement())
   name                String
   company_email       String @unique
-  password            String
-  confirm_password    String
   companyvendor_name  String
   ein                 String
   company_address     String
   phone_number        String
   personal_email      String
   company_description String
+  userId              Int
+  user                User   @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id               Int    @id @default(autoincrement())
+  name             String
+  password         String
+  confirm_password String
+  role             ROLE   @default(VISITOR)
+
+  Dealer Dealer[]
+}
+
+enum ROLE {
+  VISITOR
+  DEALER
+  ADMIN
 }

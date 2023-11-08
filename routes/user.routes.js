@@ -1,45 +1,25 @@
 const prisma = require("../db");
-const express = require("express");
 const { Router } = require("express");
-
+const { register, login } = require("../controllers/auth.controller");
+const {
+  pagination,
+  getRegisteredUsers,
+  getSpecificId,
+  getRegisteredUsersByRole,
+} = require("../controllers/user.controllers");
 const router = Router();
 
-// Get the users just for test purposes only
-router.get("/", async (req, res) => {
-  const result = await prisma.dealer.findMany();
-  res.send(result);
-});
-
-// Submit the form to the excel
-router.post("/submit", async (req, res) => {
-  const {
-    name,
-    company_email,
-    password,
-    confirm_password,
-    companyvendor_name,
-    ein,
-    company_address,
-    phone_number,
-    personal_email,
-    company_description,
-  } = req.body;
-  const result = await prisma.dealer.create({
-    data: {
-      name,
-      company_email,
-      password,
-      confirm_password,
-      companyvendor_name,
-      ein,
-      company_address,
-      phone_number,
-      personal_email,
-      company_description,
-    },
-  });
-
-  res.send(result);
-});
+// Get all registered users
+router.get("/getRegisteredUsers", getRegisteredUsers);
+// Filter all registered users by role
+router.get("/filterUsersByRole/:role", getRegisteredUsersByRole);
+// Pagination
+router.get("/pagination", pagination);
+// Get specific id user
+router.get("/getSpecificId/:id", getSpecificId);
+// Register account
+router.post("/register", register);
+// Login account
+router.post("/login", login);
 
 module.exports = router;
