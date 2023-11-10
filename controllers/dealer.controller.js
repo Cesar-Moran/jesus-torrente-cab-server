@@ -36,7 +36,7 @@ const dealerForm = async (req, res) => {
         user: true, // Esto accede al campo de relación "user" en Dealer
       },
     });
-    res.status(200).send("Valid company email, request sent", result);
+    res.send(result);
   } else {
     return res.status(400).send("Email already exists, couldn't send request");
   }

@@ -18,9 +18,9 @@ const getRegisteredUsers = async (req, res) => {
     orderBy: {
       id: "asc",
     },
-
-    take: 5,
+    take: +req.query.take,
   });
+
   res.status(200).send(result);
 };
 const getRegisteredUsersByRole = async (req, res) => {
@@ -42,10 +42,19 @@ const getSpecificId = async (req, res) => {
   });
   res.status(200).send(result);
 };
+const getAdmins = async (req, res) => {
+  const result = await prisma.user.findMany({
+    where: {
+      role: "ADMIN",
+    },
+  });
+  res.status(200).send(result);
+};
 
 module.exports = {
   pagination,
   getRegisteredUsers,
   getSpecificId,
   getRegisteredUsersByRole,
+  getAdmins,
 };

@@ -25,13 +25,22 @@ model Dealer {
 }
 
 model User {
-  id               Int    @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   name             String
   password         String
   confirm_password String
-  role             ROLE   @default(VISITOR)
+  registrationDate DateTime @default(now())
+  role             ROLE     @default(VISITOR)
+  Dealer           Dealer[]
+}
 
-  Dealer Dealer[]
+model Product {
+  id                  Int    @id @default(autoincrement())
+  product_name        String
+  product_description String
+  product_quantity    Int
+  product_price       Float
+  product_image       String
 }
 
 enum ROLE {

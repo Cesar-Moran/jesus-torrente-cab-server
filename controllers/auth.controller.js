@@ -15,11 +15,14 @@ const register = async (req, res) => {
       .status(400)
       .json({ error: "El nombre de usuario ya está en uso." });
   }
+
+  const registrationDate = new Date();
   const result = await prisma.user.create({
     data: {
       name,
       password: hashedPassword,
       confirm_password: hashedPassword,
+      registrationDate: registrationDate,
     },
   });
 

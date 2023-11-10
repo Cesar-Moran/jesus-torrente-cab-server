@@ -6,6 +6,7 @@ const {
   getRegisteredUsers,
   getSpecificId,
   getRegisteredUsersByRole,
+  getAdmins,
 } = require("../controllers/user.controllers");
 const router = Router();
 
@@ -13,6 +14,7 @@ const router = Router();
 router.get("/getRegisteredUsers", getRegisteredUsers);
 // Filter all registered users by role
 router.get("/filterUsersByRole/:role", getRegisteredUsersByRole);
+router.get("/getAdmins", getAdmins);
 // Pagination
 router.get("/pagination", pagination);
 // Get specific id user
