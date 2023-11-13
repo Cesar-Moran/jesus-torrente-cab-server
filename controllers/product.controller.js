@@ -1,36 +1,27 @@
 const prisma = require("../db");
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
-// TODO: STORE IMAGES IN FIREBASE, ETC ETC ETC
+const multer = require("multer");
 
 const getProducts = async (req, res) => {
-  const result = await prisma.product.findMany({});
+  const result = await prisma.product.findMany({
+    orderBy: {
+      id: "desc",
+    },
+  });
   res.send(result);
 };
 
 const addProduct = async (req, res) => {
-  const {
-    product_price,
-    product_description,
-    product_quantity,
-    product_name,
-    product_image,
-  } = req.body;
+  console.log("req body", req.body);
+  console.log("req file", req.file);
+  res.send({});
+};
 
-  quantityParsed = parseInt(product_quantity);
-  priceParsed = parseFloat(product_price);
-  const result = await prisma.product.create({
-    data: {
-      product_price: priceParsed,
-      product_description,
-      product_quantity: quantityParsed,
-      product_name,
-      product_image,
+const getCartProducts = async (req, res) => {
+  const productId = parseInt(req.params.productId, 10);
+
+  const result = await prisma.product.findMany({
+    where: {
+      id: productId,
     },
   });
 
@@ -40,4 +31,5 @@ const addProduct = async (req, res) => {
 module.exports = {
   addProduct,
   getProducts,
+  getCartProducts,
 };
