@@ -42,6 +42,7 @@ const getSpecificId = async (req, res) => {
   });
   res.status(200).send(result);
 };
+
 const getAdmins = async (req, res) => {
   const result = await prisma.user.findMany({
     where: {
