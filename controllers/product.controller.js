@@ -71,7 +71,7 @@ const getProducts = async (req, res) => {
     product.imageUrl = url;
   }
 
-  res.send({ products });
+  res.send(products);
 };
 
 const deleteProduct = async (req, res) => {
